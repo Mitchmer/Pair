@@ -39,6 +39,24 @@ class PersonController {
         saveToPersistentStore()
     }
     
+    // delete
+    
+    func deleteGroup(group: [Person]) {
+        if group.count == 2 {
+            let firstPerson = group[0]
+            let secondPerson = group[1]
+            guard let index1 = persons.firstIndex(of: firstPerson) else { return }
+            persons.remove(at: index1)
+            guard let index2 = persons.firstIndex(of: secondPerson) else { return }
+            persons.remove(at: index2)
+        } else {
+            let firstPerson = group[0]
+            guard let index = persons.firstIndex(of: firstPerson) else { return }
+            persons.remove(at: index)
+        }
+        saveToPersistentStore()
+    }
+    
     // persistence
     
     private func fileUrl() -> URL {

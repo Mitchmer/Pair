@@ -15,3 +15,9 @@ class Person : Codable {
         self.name = name
     }
 }
+
+extension Person : Equatable {
+    static func == (rhs: Person, lhs: Person) -> Bool {
+        return rhs.name == lhs.name
+    }
+}

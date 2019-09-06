@@ -24,7 +24,7 @@ class PersonListTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         if PersonController.shared.persons.count < 2 {
-            return 1
+            return PersonController.shared.persons.count
         } else {
             return PersonController.shared.groups.count
         }
@@ -51,17 +51,20 @@ class PersonListTableViewController: UITableViewController {
         return cell
     }
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            
+            let section = PersonController.shared.groups[indexPath.section]
+            PersonController.shared.deleteGroup(group: section)
+            
+            let indexSet = IndexSet(arrayLiteral: indexPath.section)
+            tableView.deleteSections(indexSet as IndexSet, with: .automatic)
+            
+            tableView.reloadData()
+            
+        }
     }
-    */
     
     // Actions
     
